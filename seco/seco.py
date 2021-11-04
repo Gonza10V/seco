@@ -128,9 +128,23 @@ def moclo_assembly(
     return moclo_assembly, moclo_assembly_seq
 
 def generate_protocol_ot2(
+    # this can be an object
     name = str,
-    description = str
+    description = str,
+    plasmids = [],
+    mag_mod = ['magnetic module', '1'],
+    mag_mod_plate = 'nest_96_wellplate_100ul_pcr_full_skirt',
+    temp_mod = ['temperature module', '3'],
+    temp_mod_block = 'opentrons_24_aluminumblock_nest_1.5ml_snapcap',
+    tc_mod = 'thermocycler module',
+    tc_mod_plate = 'nest_96_wellplate_100ul_pcr_full_skirt',
 ):
+    # extract parts and URIs from plasmids
+    # layout all the parts needed to assemble the plasmids
+    # calculate reactive volumes, max volume, etc
+    # calculate tips needed
+    # define if is a valid protocol
+    
     metadata = {
     'protocolName': name, # example 'Automated Golden Gate'
     'author': 'Gonzalo_Vidal <gsvidal@uc.cl>', # discuss ways to obtain this
@@ -148,16 +162,17 @@ def generate_protocol_ot2(
     if assembly_strategy == 'MoClo':
         # generate MoClo assembly, see if necesary mulptiple protocols to include purification and transformation 
         def run(protocol: protocol_api.ProtocolContext):
+            # get variables into the function
 
             # labware
-            mag_mod = protocol.load_module('magnetic module', '1')
-            mag_mod_plate = mag_mod.load_labware('nest_96_wellplate_100ul_pcr_full_skirt')
+            mag_mod = protocol.load_module(mag_mod[0], mag_mod[1])
+            mag_mod_plate = mag_mod.load_labware(mag_mod_plate)
 
-            temp_mod = protocol.load_module('temperature module', '3')
-            temp_mod_block = temp_mod.load_labware('opentrons_24_aluminumblock_nest_1.5ml_snapcap')
+            temp_mod = protocol.load_module(temp_mod[0], temp_mod[1])
+            temp_mod_block = temp_mod.load_labware(temp_mod_block)
 
-            tc_mod = protocol.load_module('thermocycler module') 
-            tc_mod_plate = tc_mod.load_labware('nest_96_wellplate_100ul_pcr_full_skirt')
+            tc_mod = protocol.load_module(tc_mod) 
+            tc_mod_plate = tc_mod.load_labware(tc_mod_plate)
             #by default on slots 7,8,10,11
 
             #plate = protocol.load_labware('corning_96_wellplate_360ul_flat', '6')
