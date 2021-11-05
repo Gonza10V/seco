@@ -1,13 +1,17 @@
 import sbol3
 import tyto
+from typing import List
 
 # creating parts
 
 def promoter(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+): #-> List[sbol3.TopLevel]:
+    '''
+    Creates a default promoter with a sequence.
+    '''
     promoter_seq = sbol3.Sequence(f'{name}_seq')
     promoter_seq.elements= sequence
     promoter_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -20,15 +24,16 @@ def promoter(
     return promoter, promoter_seq
 
 def rbs(
-    name = str,
-    description = str,
-    sequence = str
-):
-    if sequence:
-        rbs_seq = sbol3.Sequence(f'{name}_seq')
-        rbs_seq.elements= sequence
-        rbs_seq.encoding = 'https://identifiers.org/edam:format_1207'
-    else: rbs_seq = None
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default rbs with a sequence.
+    '''
+    rbs_seq = sbol3.Sequence(f'{name}_seq')
+    rbs_seq.elements= sequence
+    rbs_seq.encoding = 'https://identifiers.org/edam:format_1207'
 
     rbs = sbol3.Component(name, sbol3.SBO_DNA)
     rbs.name = name
@@ -38,10 +43,13 @@ def rbs(
     return rbs, rbs_seq
 
 def cds(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default cds with a sequence.
+    '''
     cds_seq = sbol3.Sequence(f'{name}_seq')
     cds_seq.elements= sequence
     cds_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -54,10 +62,13 @@ def cds(
     return cds, cds_seq
 
 def terminator(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default terminator with a sequence.
+    '''
     terminator_seq = sbol3.Sequence(f'{name}_seq')
     terminator_seq.elements= sequence
     terminator_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -70,10 +81,13 @@ def terminator(
     return terminator, terminator_seq
 
 def deg_tag(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default degradation tag with a sequence.
+    '''
     deg_tag_seq = sbol3.Sequence(f'{name}_seq')
     deg_tag_seq.elements= sequence
     deg_tag_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -86,10 +100,13 @@ def deg_tag(
     return deg_tag, deg_tag_seq
 
 def transcriptional_unit(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default transcriptional unit with a sequence.
+    '''
     transcriptional_unit_seq = sbol3.Sequence(f'{name}_seq')
     transcriptional_unit_seq.elements= sequence
     transcriptional_unit_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -104,7 +121,10 @@ def engineered_region(
     name = str,
     description = str,
     sequence = str
-):
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default engineered region with a sequence.
+    '''
     engineered_region_seq = sbol3.Sequence(f'{name}_seq')
     engineered_region_seq.elements= sequence
     engineered_region_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -116,10 +136,13 @@ def engineered_region(
     return engineered_region, engineered_region_seq
 
 def plasmid_vector(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default plasmid vector with a sequence.
+    '''
     plasmid_vector_seq = sbol3.Sequence(f'{name}_seq')
     plasmid_vector_seq.elements= sequence
     plasmid_vector_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -134,9 +157,12 @@ def plasmid_vector(
 # creating experiments
 
 def media(
-    name = str,
-    description = str
-):
+    name : str,
+    description : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default media.
+    '''
     media = sbol3.Component(name, sbol3.SBO_FUNCTIONAL_ENTITY)
     media.name = name
     media.description = description
@@ -144,9 +170,12 @@ def media(
     return media
 
 def strain(
-    name = str,
-    description = str
-):
+    name : str,
+    description : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default strain.
+    '''
     strain = sbol3.Component(name, sbol3.SBO_FUNCTIONAL_ENTITY)
     strain.name = name
     strain.description = description
@@ -154,9 +183,12 @@ def strain(
     return strain
 
 def plasmid(
-    name = str,
-    description = str
-):
+    name : str,
+    description : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default plasmid with a sequence.
+    '''
     plasmid = sbol3.Component(name, sbol3.SBO_DNA)
     plasmid.name = name
     plasmid.description = description
@@ -165,19 +197,26 @@ def plasmid(
     return plasmid 
 
 def simple_chemical(
-    name = str,
-    description = str
-):
+    name : str,
+    description : str,
+    #chemid : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default simple chemical.
+    '''
     simple_chemical = sbol3.Component(name, sbol3.SBO_SIMPLE_CHEMICAL)
     simple_chemical.name = name
     simple_chemical.description = description
     return  simple_chemical
 
 def basic_linker(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default basic linker with a sequence.
+    '''
     basic_linker_seq = sbol3.Sequence(f'{name}_seq')
     basic_linker_seq.elements= sequence
     basic_linker_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -191,10 +230,13 @@ def basic_linker(
     return basic_linker, basic_linker_seq
 
 def basic_part(
-    name = str,
-    description = str,
-    sequence = str
-):
+    name : str,
+    description : str,
+    sequence : str
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default BASIC part with a sequence.
+    '''
     basic_part_seq = sbol3.Sequence(f'{name}_seq')
     basic_part_seq.elements= sequence
     basic_part_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -208,9 +250,12 @@ def basic_part(
     return basic_part, basic_part_seq
 
 def basic_clip(
-    name = str,
-    clip = [] # Linker1, Part, Linker2
-):
+    name : str,
+    clip : [] # Linker1, Part, Linker2
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default BASIC Clip with a sequence.
+    '''
     basic_clip_seq = sbol3.Sequence(f'{name}_seq')
     # look for sequences on clip
     # get the assembly sequence, reomve overlaping sequences
@@ -230,7 +275,10 @@ def basic_clip(
 def basic_assembly(
     name = str,
     assembly = [] # basic_clip
-):
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default plasmid with a sequence using BASIC Clips.
+    '''
     basic_assembly_seq = sbol3.Sequence(f'{name}_seq')
     #look for sequences on assembly
     basic_assembly_seq.elements= sequence
@@ -246,7 +294,10 @@ def basic_assembly(
 def moclo_assembly(
     name = str,
     assembly = [] # moclo_part
-):
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default plasmid with a sequence using MoClo parts.
+    '''
     moclo_assembly_seq = sbol3.Sequence(f'{name}_seq')
     #look for sequences on assembly
     moclo_assembly_seq.elements= sequence
@@ -261,8 +312,8 @@ def moclo_assembly(
 
 def generate_protocol_ot2(
     # this can be an object
-    name = str,
-    description = str,
+    name : str,
+    description : str,
     plasmids = [],
     mag_mod = ['magnetic module', '1'],
     mag_mod_plate = 'nest_96_wellplate_100ul_pcr_full_skirt',
