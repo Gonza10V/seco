@@ -99,42 +99,6 @@ def deg_tag(
     deg_tag.sequences.append(deg_tag_seq)
     return deg_tag, deg_tag_seq
 
-def transcriptional_unit(
-    name : str,
-    description : str,
-    sequence : str
-):#-> List[sbol3.TopLevel]:
-    '''
-    Creates a default transcriptional unit with a sequence.
-    '''
-    transcriptional_unit_seq = sbol3.Sequence(f'{name}_seq')
-    transcriptional_unit_seq.elements= sequence
-    transcriptional_unit_seq.encoding = 'https://identifiers.org/edam:format_1207'
-
-    transcriptional_unit = sbol3.Component(name, sbol3.SBO_DNA)
-    transcriptional_unit.name = name
-    transcriptional_unit.description = description
-    transcriptional_unit.roles.append(sbol3.SO_ENGINEERED_REGION)
-    return transcriptional_unit, transcriptional_unit_seq
-
-def engineered_region(
-    name = str,
-    description = str,
-    sequence = str
-):#-> List[sbol3.TopLevel]:
-    '''
-    Creates a default engineered region with a sequence.
-    '''
-    engineered_region_seq = sbol3.Sequence(f'{name}_seq')
-    engineered_region_seq.elements= sequence
-    engineered_region_seq.encoding = 'https://identifiers.org/edam:format_1207'
-
-    engineered_region = sbol3.Component(name, sbol3.SBO_DNA)
-    engineered_region.name = name
-    engineered_region.description = description
-    engineered_region.roles.append(sbol3.SO_ENGINEERED_REGION)
-    return engineered_region, engineered_region_seq
-
 def plasmid_vector(
     name : str,
     description : str,
@@ -154,7 +118,54 @@ def plasmid_vector(
     plasmid_vector.sequences.append(plasmid_vector_seq)
     return plasmid_vector, plasmid_vector_seq
 
+def transcriptional_unit(
+    name : str,
+    description : str,
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default transcriptional unit with a sequence.
+    '''
+    #transcriptional_unit_seq = sbol3.Sequence(f'{name}_seq')
+    #transcriptional_unit_seq.elements= sequence
+    #transcriptional_unit_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    transcriptional_unit = sbol3.Component(name, sbol3.SBO_DNA)
+    transcriptional_unit.name = name
+    transcriptional_unit.description = description
+    transcriptional_unit.roles.append(sbol3.SO_ENGINEERED_REGION)
+    #transcriptional_unit.sequences.append(transcriptional_unit_seq)
+    return transcriptional_unit # , transcriptional_unit_seq
+
+def engineered_region(
+    name : str,
+    description : str,
+    sc : List = [] # input SubComponents or Components adding internal creation of SubComponents
+):#-> List[sbol3.TopLevel]:
+    '''
+    Creates a default engineered region with a sequence.
+    '''
+    #sequence = blunt or assembly?
+    #engineered_region_seq = sbol3.Sequence(f'{name}_seq')
+    #engineered_region_seq.elements= sequence
+    #engineered_region_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    engineered_region = sbol3.Component(name, sbol3.SBO_DNA)
+    engineered_region.name = name
+    engineered_region.description = description
+    engineered_region.roles.append(sbol3.SO_ENGINEERED_REGION)
+    for x in sc:
+        engineered_region.features.append(x)
+    #fix order
+    if len(engineered_region.features) > 1:
+            for i in range(len(engineered_region.features)-1):
+                engineered_region.constraints = [sbol3.Constraint(sbol3.SBOL_PRECEDES, engineered_region.features[i], engineered_region.features[i+1])]
+    else: pass
+    #engineered_region.sequences.append(engineered_region_seq)
+    return engineered_region # , engineered_region_seq
+
+
 # creating experiments
+
 
 def media(
     name : str,
