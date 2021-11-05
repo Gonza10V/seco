@@ -1,6 +1,138 @@
 import sbol3
 import tyto
 
+# creating parts
+
+def promoter(
+    name = str,
+    description = str,
+    sequence = str
+):
+    promoter_seq = sbol3.Sequence(f'{name}_seq')
+    promoter_seq.elements= sequence
+    promoter_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    promoter = sbol3.Component(name, sbol3.SBO_DNA)
+    promoter.name = name
+    promoter.description = description
+    promoter.roles. append(sbol3.SO_PROMOTER)
+    promoter.sequences.append(promoter_seq)
+    return promoter, promoter_seq
+
+def rbs(
+    name = str,
+    description = str,
+    sequence = str
+):
+    if sequence:
+        rbs_seq = sbol3.Sequence(f'{name}_seq')
+        rbs_seq.elements= sequence
+        rbs_seq.encoding = 'https://identifiers.org/edam:format_1207'
+    else: rbs_seq = None
+
+    rbs = sbol3.Component(name, sbol3.SBO_DNA)
+    rbs.name = name
+    rbs.description = description
+    rbs.roles. append(sbol3.SO_RBS)
+    rbs.sequences.append(rbs_seq)
+    return rbs, rbs_seq
+
+def cds(
+    name = str,
+    description = str,
+    sequence = str
+):
+    cds_seq = sbol3.Sequence(f'{name}_seq')
+    cds_seq.elements= sequence
+    cds_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    cds = sbol3.Component(name, sbol3.SBO_DNA)
+    cds.name = name
+    cds.description = description
+    cds.roles. append(sbol3.SO_CDS)
+    cds.sequences.append(cds_seq)
+    return cds, cds_seq
+
+def terminator(
+    name = str,
+    description = str,
+    sequence = str
+):
+    terminator_seq = sbol3.Sequence(f'{name}_seq')
+    terminator_seq.elements= sequence
+    terminator_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    terminator = sbol3.Component(name, sbol3.SBO_DNA)
+    terminator.name = name
+    terminator.description = description
+    terminator.roles. append(sbol3.SO_TERMINATOR)
+    terminator.sequences.append(terminator_seq)
+    return terminator, terminator_seq
+
+def deg_tag(
+    name = str,
+    description = str,
+    sequence = str
+):
+    deg_tag_seq = sbol3.Sequence(f'{name}_seq')
+    deg_tag_seq.elements= sequence
+    deg_tag_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    deg_tag = sbol3.Component(name, sbol3.SBO_DNA)
+    deg_tag.name = name
+    deg_tag.description = description
+    deg_tag.roles. append(tyto.SO.protein_stability_element)
+    deg_tag.sequences.append(deg_tag_seq)
+    return deg_tag, deg_tag_seq
+
+def transcriptional_unit(
+    name = str,
+    description = str,
+    sequence = str
+):
+    transcriptional_unit_seq = sbol3.Sequence(f'{name}_seq')
+    transcriptional_unit_seq.elements= sequence
+    transcriptional_unit_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    transcriptional_unit = sbol3.Component(name, sbol3.SBO_DNA)
+    transcriptional_unit.name = name
+    transcriptional_unit.description = description
+    transcriptional_unit.roles.append(sbol3.SO_ENGINEERED_REGION)
+    return transcriptional_unit, transcriptional_unit_seq
+
+def engineered_region(
+    name = str,
+    description = str,
+    sequence = str
+):
+    engineered_region_seq = sbol3.Sequence(f'{name}_seq')
+    engineered_region_seq.elements= sequence
+    engineered_region_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    engineered_region = sbol3.Component(name, sbol3.SBO_DNA)
+    engineered_region.name = name
+    engineered_region.description = description
+    engineered_region.roles.append(sbol3.SO_ENGINEERED_REGION)
+    return engineered_region, engineered_region_seq
+
+def plasmid_vector(
+    name = str,
+    description = str,
+    sequence = str
+):
+    plasmid_vector_seq = sbol3.Sequence(f'{name}_seq')
+    plasmid_vector_seq.elements= sequence
+    plasmid_vector_seq.encoding = 'https://identifiers.org/edam:format_1207'
+
+    plasmid_vector = sbol3.Component(name, sbol3.SBO_DNA)
+    plasmid_vector.name = name
+    plasmid_vector.description = description
+    plasmid_vector.roles. append(tyto.SO.plasmid_vector)
+    plasmid_vector.sequences.append(plasmid_vector_seq)
+    return plasmid_vector, plasmid_vector_seq
+
+# creating experiments
+
 def media(
     name = str,
     description = str
@@ -39,7 +171,7 @@ def simple_chemical(
     simple_chemical = sbol3.Component(name, sbol3.SBO_SIMPLE_CHEMICAL)
     simple_chemical.name = name
     simple_chemical.description = description
-    return = simple_chemical
+    return  simple_chemical
 
 def basic_linker(
     name = str,
@@ -99,7 +231,7 @@ def basic_assembly(
     name = str,
     assembly = [] # basic_clip
 ):
-   basic_assembly_seq = sbol3.Sequence(f'{name}_seq')
+    basic_assembly_seq = sbol3.Sequence(f'{name}_seq')
     #look for sequences on assembly
     basic_assembly_seq.elements= sequence
     basic_assembly_seq.encoding = 'https://identifiers.org/edam:format_1207'
@@ -290,3 +422,4 @@ def generate_protocol_ot2(
 #flow_cytometer
 #96_well_plate
 #OT-2
+# implement()
